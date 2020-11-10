@@ -1,47 +1,26 @@
 package za.co.rain.spring.utils;
 
-import za.co.rain.spring.model.Individual;
+import java.time.LocalDateTime;
+import java.time.temporal.IsoFields;
+import java.util.ArrayList;
+import java.util.List;
+
+import za.co.rain.spring.model.Register;
+import za.co.rain.spring.model.Student;
 
 public class ApiUtililities {
 	
-	public static Individual setNewValues(Individual individual, Individual individualDetails) {
-		
-		if (individualDetails.getHref() != null) {
-		individual.setHref(individualDetails.getHref());
+
+	public static List<Register> buildRegisters(List<Student> students) {
+
+		List<Register> registers = new ArrayList<Register>();
+		for (Student s : students) {
+			
+			registers.add(new Register(s.getId(), s.getName()+" "+s.getSurname(), LocalDateTime.now().toLocalTime(),
+					LocalDateTime.now().toLocalDate(), LocalDateTime.now().get(IsoFields.QUARTER_OF_YEAR), s.getClas(), s.getGrade(), s.isPresent(),0l,0l));
 		}
-		if (individualDetails.getAristocraticTitle() != null) {
-		individual.setAristocraticTitle(individualDetails.getAristocraticTitle());
+			return registers;
 		}
-		if (individualDetails.getBirthDate() != null) {
-		individual.setBirthDate(individualDetails.getBirthDate());
-		}
-		if (individualDetails.getCountryOfBirth() != null) {
-		individual.setCountryOfBirth(individualDetails.getCountryOfBirth());
-		}
-		if (individualDetails.getDeathDate() != null) {
-		individual.setDeathDate(individualDetails.getDeathDate());
-		}
-		if (individualDetails.getCountryOfBirth() != null) {
-		individual.setFamilyName(individualDetails.getCountryOfBirth());
-		}
-		if (individualDetails.getFullName() != null) {
-		individual.setFullName(individualDetails.getFullName());
-		}
-		if (individualDetails.getGender() != null) {
-		individual.setGender(individualDetails.getGender());
-		}
-		if (individualDetails.getBaseType() != null) {
-		individual.setBaseType(individualDetails.getBaseType());
-		}
-		if (individualDetails.getSchemaLocation() != null) {
-		individual.setSchemaLocation(individualDetails.getSchemaLocation());
-		}
-		if (individualDetails.getType() != null) {
-		individual.setType(individualDetails.getType());
-		}
-		
-		return individual;
-	}
 
 }
 
